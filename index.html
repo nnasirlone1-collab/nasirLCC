@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mining App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    button { padding: 12px; font-size: 18px; }
+  </style>
+</head>
+<body>
+
+<h2>Mining Dashboard</h2>
+
+<p id="status">Loading...</p>
+<button onclick="startMining()">Start Mining</button>
+
+<script>
+async function startMining() {
+  document.getElementById("status").innerText = "Mining…";
+
+  const res = await fetch("https://zwzfetvfwxcqqpegimas.supabase.co/functions/v1/mine", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        userId: "test-user-1"
+    })
+  });
+
+  const data = await res.json();
+  document.getElementById("status").innerText = JSON.stringify(data, null, 2);
+}
+</script>
+
+</body>
+</html>
